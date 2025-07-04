@@ -1,27 +1,89 @@
-# ClimaShopApp
+# ClimaShop - Application Angular 18
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.20.
+## 🎓 Contexte de Réalisation
 
-## Development server
+Ce projet a été **réalisé dans le cadre de ma formation de Développeur Web et Mobile** chez Human Booster. Il s’inscrit dans la **préparation à l’évaluation Angular** et a pour objectif de mettre en pratique les compétences acquises en développement frontend avec **Angular 18**, **TypeScript** et **Tailwind CSS**.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🏢 Description
 
-## Code scaffolding
+ClimaShop est une application web moderne simulant la vitrine d’une startup spécialisée dans les équipements de climatisation et ventilation. Elle permet de consulter un catalogue de produits avec un **système de filtrage**, dans une interface claire, responsive et animée.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Fonctionnalités Implémentées
 
-## Build
+### ✅ Pages Principales
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Page d'accueil** (`/accueil`) : Présentation institutionnelle avec hero section, avantages, statistiques et call-to-action
+- **Page articles** (`/articles`) : Catalogue des produits avec système de filtrage
 
-## Running unit tests
+### ✅ Système de Filtrage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Recherche par titre** : Recherche en temps réel sur le nom et la description
+- **Filtrage par prix maximum**
+- **Affichage des promotions uniquement**
+- **Filtres réactifs** avec mise à jour dynamique
 
-## Running end-to-end tests
+### ✅ Affichage des Produits
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Cartes produits : image, titre, description, prix, caractéristiques
+- Promotions : badges visuels et prix barrés
+- Icônes Material pour les features
+- Design responsive
 
-## Further help
+## 🛠️ Technologies Utilisées
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Frontend
+
+- Angular 18 avec **composants standalone**
+- TypeScript (mode strict)
+- Reactive Forms pour la gestion des filtres
+- RxJS pour les observables
+- Tailwind CSS
+- Material Icons (Google)
+
+### Architecture
+
+- Séparation claire : `services`, `components`, `models`
+- Interfaces typées (`Product`, `Feature`)
+- Routing Angular
+- Service dédié pour la gestion des données produits
+
+## 📁 Structure du Projet
+
+```
+src/
+│
+├── app/
+│   ├── components/
+│   │   └── navbar/           # Composant de navigation
+│   │   └── accueil/          # Composant de la page d'accueil institutionnelle
+│   │   └── articles/         # Composant de la page catalogue avec filtres
+│   │
+│   ├── services/
+│   │   └── product.service.ts # Service de gestion des produits
+│   │
+│   └── models/
+│       ├── product.ts        # Interface Product
+│       └── feature.ts        # Interface Feature
+│
+├── styles.css                # Styles Tailwind + personnalisés
+└── index.html                # HTML principal avec Material Icons
+```
+
+## 🔧 Installation et Lancement
+
+```bash
+# Installation
+npm install
+
+# Lancement en mode développement
+ng serve
+# ou
+npm start
+
+# Build production
+ng build
+```
+
+---
+
+_Développé avec ❤️ par Youcef KOUAOUCI - FORMATION ASSURÉE PAR HUMAN BOOSTER SOUS L'ENCADREMENT DU FORMATEUR GAETAN THOMAS_

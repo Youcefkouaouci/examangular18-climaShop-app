@@ -12,11 +12,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './articles.component.css',
 })
 export class ArticlesComponent implements OnInit {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
+  products: Product[] = []; //Liste Liste complète des produits
+  filteredProducts: Product[] = []; // Liste des produits filtrés pour l'affichage
   loading = true;
-  filterForm: FormGroup;
+  filterForm: FormGroup; // Formulaire  pour les filtres
 
+  // Constructeur : injection des dépendances
   constructor(
     private productService: ProductService,
     private formBuilder: FormBuilder
@@ -28,19 +29,25 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
+  // Méthode appelée après l'initialisation du composant (Charge les produits au démarrage et Configure les filtres)
+
   ngOnInit() {
     this.loadProducts();
     this.setupFilters();
   }
 
+  // Méthode pour charger les produits depuis le service
   loadProducts() {
-    this.loading = true;
+    this.loading = true; // Active l'indicateur de chargement
+
+    // Appel du service pour récupérer tous les produits
     this.productService.getAll().subscribe({
       next: (products) => {
-        this.products = products;
-        this.applyFilters();
-        this.loading = false;
+        this.products = products; // Stocke les produits
+        this.applyFilters(); // Applique les filtres
+        this.loading = false; // Désactive l'indicateur de chargement
       },
+      // Fonction appelée en cas d'erreur
       error: (error) => {
         console.error('Erreur lors du chargement des produits:', error);
         this.loading = false;
@@ -48,12 +55,15 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
+  // Méthode pour configurer  des filtres
   setupFilters() {
+    // return observable = qui écoute les changements dans le formulaire de filtre
     this.filterForm.valueChanges.subscribe(() => {
-      this.applyFilters();
+      this.applyFilters(); // Applique les filtres à chaque changement
     });
   }
 
+  // Méthode principale pour appliquer les filtres aux produits
   applyFilters() {
     const filters = this.filterForm.value;
 
@@ -70,6 +80,7 @@ export class ArticlesComponent implements OnInit {
 
       // Price filter
       if (filters.maxPrice && filters.maxPrice > 0) {
+        // Calcule le prix effectif (avec réduction si applicable)
         const effectivePrice =
           product.discountPercent > 0
             ? this.getDiscountedPrice(product)
@@ -78,6 +89,7 @@ export class ArticlesComponent implements OnInit {
       }
 
       // Promotion filter
+      // // Filtre pour afficher uniquement les promotions
       if (filters.promotionOnly && product.discountPercent === 0) {
         return false;
       }
@@ -86,10 +98,11 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
+  // Méthode utilitaire pour calculer le prix avec réduction
   getDiscountedPrice(product: Product): number {
     return product.fullPrice * (1 - product.discountPercent);
   }
-
+  // Méthode pour réinitialiser tous les filtres
   resetFilters() {
     this.filterForm.reset({
       search: '',
